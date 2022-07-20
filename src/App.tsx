@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Results from "./pages/Results";
+import { Route } from "wouter";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Route path="/">{(params) => <Results title="Characters" />}</Route>
+      <Route path="/characters/:id?">
+        {(params) => <Results title="Characters" id={params.id} />}
+      </Route>
+      <Route path="/locations/:id?">
+        {(params) => <Results title="Locations" id={params.id} />}
+      </Route>{" "}
+      <Route path="/episodes/:id?">
+        {(params) => <Results title="Episodes" id={params.id} />}
+      </Route>
+    </>
   );
 }
 
