@@ -1,0 +1,30 @@
+.section-title {
+  text-align: center;
+  padding: 20px 5px;
+  align-self: flex-start;
+}
+.section-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.section-search-bar {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.section-search {
+  margin-right: 5px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.centered-msg {
+  margin-top: 30vh;
+}

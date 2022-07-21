@@ -1,20 +1,8 @@
-import {Character, Filter} from '../types'
+import {Character} from '../types'
 
-export default function getCharacters({filter, page} : {filter?: Filter, page?: number}) : Promise<Character[]>{
-    let apiURL = "https://rickandmortyapi.com/api/character/?";
-    if (filter){
-        if (filter.status){
-            apiURL = apiURL.concat(`&status=${filter.status}`);
-        }
-        if (filter.gender){
-            apiURL = apiURL.concat(`&gender=${filter.gender}`);
-        }
-        if (filter.species){
-            apiURL = apiURL.concat(`&species=${filter.species}`);
-        }
-    }
-    
-
+export default function getCharacterSearch({keyword, page}: {keyword: string, page?: number}) : Promise<Character[]>{
+    const apiURL =  `https://rickandmortyapi.com/api/character/?name=${keyword}`;
+    if (page) apiURL.concat(`?page=${page}`)
 
     const fetchCharacters = async () : Promise<Character[]> => {
         const response = await fetch(apiURL);

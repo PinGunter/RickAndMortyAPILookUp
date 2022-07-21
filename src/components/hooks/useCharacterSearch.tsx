@@ -1,14 +1,8 @@
-import getCharacters from "../../services/getCharacters";
-import { Character, Filter } from "../../types";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import getCharacterSearch from "../../services/getCharacterSearch";
+import { Character } from "../../types";
 
-export function useCharacter({
-  filter,
-  page,
-}: {
-  filter?: Filter;
-  page?: number;
-}) {
+export default function useCharacterSearch(keyword: string) {
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [error, setError] = useState(false);
@@ -18,14 +12,15 @@ export function useCharacter({
     let newCharacters: Character[];
     (async () => {
       try {
-        newCharacters = await getCharacters({ filter, page });
+        newCharacters = await getCharacterSearch({ keyword });
         setCharacters(newCharacters);
         setLoading(false);
       } catch (error) {
         setError(true);
+        setLoading(false);
       }
     })();
-  }, [filter, page]);
+  }, [keyword]);
 
   return { loading, error, characters };
 }

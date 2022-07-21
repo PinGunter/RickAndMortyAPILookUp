@@ -1,32 +1,29 @@
 import React from "react";
-import { Navbar, NavLink, Nav, Container } from "react-bootstrap";
-import { Link } from "wouter";
-import "./styles.css";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import { useLocation } from "wouter";
 
 export default function Header() {
+  const [, setLocation] = useLocation();
   return (
     <>
-      <Navbar bg="light" expand="lg" collapseOnSelect>
+      <Navbar variant="dark" bg="primary" expand="lg" collapseOnSelect>
         <Container fluid>
           <Navbar.Brand>Rick and Morty API Lookup</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse>
-            <Nav className="me-auto">
-              <NavLink>
-                <Link className="link" to="/characters">
-                  Characters
-                </Link>
-              </NavLink>
-              <NavLink>
-                <Link className="link" to="/locations">
-                  Locations
-                </Link>
-              </NavLink>
-              <NavLink>
-                <Link className="link" to="/episodes">
-                  Episodes
-                </Link>
-              </NavLink>
+            <Nav>
+              <Nav.Link
+                className="link"
+                onClick={() => setLocation("/characters")}
+              >
+                Characters
+              </Nav.Link>
+              <Nav.Link onClick={() => setLocation("/locations")}>
+                Locations
+              </Nav.Link>
+              <Nav.Link onClick={() => setLocation("/episodes")}>
+                Episodes
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

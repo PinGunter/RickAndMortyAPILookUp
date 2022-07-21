@@ -1,0 +1,14 @@
+POR HACER:
+- Modularizar página en grid y filtros?
+- Que la pagina de inicio y búsqueda sean la misma, solo se actualice el componente del grid (o no). Así se aplican los filtros sobre la búsqueda tmb
+- Pagina episodios
+- Pagina localizacion
+- Paginacion
+- Modal de personajes
+
+
+HECHO:
+- Manejar errores
+- Filtro 
+
+
