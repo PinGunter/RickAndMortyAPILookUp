@@ -1,16 +1,17 @@
-import getSingleCharacter from "../../services/getSingleCharacter";
-import { FullCharacter } from "../../types";
+import getSingleCharacter from "../services/getSingleCharacter";
+import { Character } from "../types";
 import { useState, useEffect } from "react";
 
 export function useSingleCharacter({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
-  const [character, setCharacter] = useState<FullCharacter>({
+  const [character, setCharacter] = useState<Character>({
     id: "-1",
     name: "",
     status: "",
     gender: "",
     image: "",
     species: "",
+    type: "",
     origin: {
       name: "",
       url: "",
@@ -25,7 +26,7 @@ export function useSingleCharacter({ id }: { id: string }) {
 
   useEffect(() => {
     setLoading(true);
-    let newCharacter: FullCharacter;
+    let newCharacter: Character;
     (async () => {
       try {
         newCharacter = await getSingleCharacter(id);

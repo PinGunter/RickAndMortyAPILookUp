@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header";
-import CharacterGrid from "./pages/CharacterGrid";
+import CharacterGrid from "./pages/Home";
 import { Route } from "wouter";
 import SearchResults from "./pages/SearchResults";
 
@@ -10,8 +10,8 @@ function App() {
     <>
       <Header />
       <Route path="/">{(params) => <CharacterGrid title="Characters" />}</Route>
-      <Route path="/characters/:id?">
-        {(params) => <CharacterGrid title="Characters" id={params.id} />}
+      <Route path="/characters">
+        {(params) => <CharacterGrid title="Characters" />}
       </Route>
       <Route path="/locations/:id?">
         {(params) => <h1>Localizaciones</h1>}

@@ -10,20 +10,17 @@ export type Character = {
     gender: string, 
     image: string,
     species: string,
-    origin: Location,
-    location : Location    
-}
-
-export type FullCharacter = {
-    id: string,
-    name: string,
-    status: string, 
-    gender: string, 
-    image: string,
-    species: string,
+    type: string,
     origin: Location,
     location : Location,
     episode: string[]  
+}
+
+export type Episode = {
+    id: string, 
+    name: string,
+    airDate: string,
+    codeName: string
 }
 
 export type Filter = {

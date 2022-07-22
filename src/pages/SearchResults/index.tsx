@@ -1,6 +1,6 @@
 import { Container, Card, Row, Col, Spinner } from "react-bootstrap";
-import CharacterCard from "../../components/Character";
-import useCharacterSearch from "../../components/hooks/useCharacterSearch";
+import CharacterCard from "../../components/CharacterCard";
+import useCharacterSearch from "../../hooks/useCharacterSearch";
 
 export default function SearchResults({ keyword }: { keyword: string }) {
   const { loading, error, characters } = useCharacterSearch(keyword);

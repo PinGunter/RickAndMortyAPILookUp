@@ -20,8 +20,8 @@ export default function getCharacterSearch({keyword, page}: {keyword: string, pa
          * location
          */
         return results.map((ch: any) => {
-            const {id, name, status, gender, image, species, origin, location} = ch;
-            return {id, name, status, gender, image, species, origin, location};
+            const {id, name, status, gender, image, species, origin, location, episode} = ch;
+            return {id, name, status, gender, image, species, origin, location, episode};
         })
 
     }
