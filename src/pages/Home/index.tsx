@@ -20,6 +20,7 @@ export default function Home({ title }: { title: string }) {
   const [filters, setFilters] = useState<Filter>(defaultFilter);
   const [loading, setLoading] = useState(true);
   const [nextPage, setNextPage] = useState(1);
+  const [loadingNextPage, setLoadingNextPage] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -39,20 +40,22 @@ export default function Home({ title }: { title: string }) {
 
   useEffect(() => {
     if (nextPage === 1) return;
-    setLoading(true);
-    let nextCharacters: Character[];
     (async () => {
-      const response = await getCharacters({
-        filter: filters,
-        page: nextPage,
-      });
-      nextCharacters = response.characters;
-      setCharacters((previousCharacters) =>
-        previousCharacters.concat(nextCharacters)
-      );
-      setLoading(false);
+      setLoadingNextPage(true);
+      try {
+        const response = await getCharacters({
+          filter: filters,
+          page: nextPage,
+        });
+        const newCharacters = response.characters;
+        setCharacters((prevCharacters) => prevCharacters.concat(newCharacters));
+        setLoadingNextPage(false);
+      } catch (error) {
+        setLoadingNextPage(false);
+        setNextPage(-1);
+      }
     })();
-  }, [nextPage, filters]);
+  }, [nextPage]);
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
@@ -115,6 +118,7 @@ export default function Home({ title }: { title: string }) {
           characters={characters}
           loading={loading}
           setPage={setNextPage}
+          loadingNextPage={loadingNextPage}
         />
         <Col>
           <Container>

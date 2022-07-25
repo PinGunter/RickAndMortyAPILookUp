@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef } from "react";
-import { Col, Spinner, Container, Row } from "react-bootstrap";
-import useNearScreen from "../../hooks/useNearScreen";
+import React from "react";
+import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
+import { Waypoint } from "react-waypoint";
 import { Character, Filter } from "../../types";
 import CharacterCard from "../CharacterCard";
-import debounce from "just-debounce-it";
 
 type CharacterGridProps = {
   characters: Character[];
   loading: boolean;
-  page?: number;
+  loadingNextPage: boolean;
   filters?: Filter;
   setPage: Function;
 };
@@ -16,28 +15,14 @@ type CharacterGridProps = {
 export default function CharacterGrid({
   characters,
   loading,
-  page,
+  loadingNextPage,
   filters,
   setPage,
 }: CharacterGridProps) {
-  const externalRef = useRef();
-  const { isNearScreen } = useNearScreen({
-    externalRef: loading ? null : externalRef,
-    once: false,
-    distance: "100px",
-  });
-
   const handleNextPage = () => {
-    setPage((currentPage: number) => {
-      return currentPage + 1;
-    });
+    console.log("fin");
+    setPage((currentPage: number) => currentPage + 1);
   };
-
-  const debounceHandleNextPage = useCallback(debounce(handleNextPage, 200), []);
-
-  useEffect(() => {
-    if (isNearScreen) debounceHandleNextPage();
-  }, [debounceHandleNextPage, isNearScreen]);
 
   return (
     <>
@@ -59,8 +44,18 @@ export default function CharacterGrid({
                 })}
               </Row>
             </Container>
-            {/* @ts-ignore*/}
-            <div id="visor" ref={externalRef}></div>
+            <Waypoint onEnter={handleNextPage}>
+              <div>
+                {loadingNextPage ? (
+                  <Alert variant="warning">
+                    Loading
+                    <Spinner animation="border" />
+                  </Alert>
+                ) : (
+                  ""
+                )}
+              </div>
+            </Waypoint>
           </Col>
         </>
       )}
