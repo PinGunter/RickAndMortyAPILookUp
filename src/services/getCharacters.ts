@@ -2,20 +2,17 @@ import {Character, Filter} from '../types'
 
 type characterResponse = {
     characters: Character[];
-    nextUrl: string | null;
 }
 
-export default function getCharacters({filter, page} : {filter?: Filter, page?: number}) : characterResponse{
+export default function getCharacters({filter, page} : {filter?: Filter, page?: number}) : Promise<characterResponse>{
     let apiURL = `https://rickandmortyapi.com/api/character/?page=${page ? page : 1}`;
     if (filter){
         if (filter.status){
-            apiURL = apiURL.concat(`&status=${filter.status}`);
-        }
+            apiURL = `${apiURL}&status=${filter.status}`;        }
         if (filter.gender){
-            apiURL = apiURL.concat(`&gender=${filter.gender}`);
-        }
+            apiURL = `${apiURL}&gender=${filter.gender}`;        }
         if (filter.species){
-            apiURL = apiURL.concat(`&species=${filter.species}`);
+            apiURL = `${apiURL}&species=${filter.species}`;
         }
     }
     
@@ -25,7 +22,6 @@ export default function getCharacters({filter, page} : {filter?: Filter, page?: 
         if (!response.ok) throw new Error("Error while fetching data")
         const responseJson = await response.json(); 
         const {results} = responseJson;
-        const {info} = responseJson;
         /**
          * id
          * Name
@@ -37,11 +33,11 @@ export default function getCharacters({filter, page} : {filter?: Filter, page?: 
          * location
          */
 
-         const characters = results.map((ch: any) :Character => {
+         const _characters = results.map((ch: any) :Character => {
             const {id, name, status, gender, image, species, type, origin, location, episode} = ch;
             return {id, name, status, gender, image, species,type,origin, location, episode};
          });
-         return {characters, nextUrl: info.next};
+         return {characters: _characters};
 
     }
 

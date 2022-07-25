@@ -18,26 +18,41 @@ export default function Home({ title }: { title: string }) {
   const [, setLocation] = useLocation();
   const [characters, setCharacters] = useState<Character[]>([]);
   const [filters, setFilters] = useState<Filter>(defaultFilter);
-  const [loading, setLoading] = useState(false);
-  const [nextPage, setNextPage] = useState<string | null>("");
+  const [loading, setLoading] = useState(true);
+  const [nextPage, setNextPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     (async () => {
       try {
-        let response = getCharacters({ filter: filters, page: 0 });
-        const newCharacters = await response.characters;
-        const newNextPage = response.nextUrl;
-        setNextPage(newNextPage);
-        console.log(newNextPage);
+        let response = await getCharacters({
+          filter: filters,
+        });
+        const newCharacters = response.characters;
         setCharacters(newCharacters);
         setLoading(false);
       } catch (error) {
-        setCharacters([]);
         setLoading(false);
       }
     })();
   }, [filters]);
+
+  useEffect(() => {
+    if (nextPage === 1) return;
+    setLoading(true);
+    let nextCharacters: Character[];
+    (async () => {
+      const response = await getCharacters({
+        filter: filters,
+        page: nextPage,
+      });
+      nextCharacters = response.characters;
+      setCharacters((previousCharacters) =>
+        previousCharacters.concat(nextCharacters)
+      );
+      setLoading(false);
+    })();
+  }, [nextPage, filters]);
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
@@ -96,7 +111,11 @@ export default function Home({ title }: { title: string }) {
         </div>
       </Container>
       <Row>
-        <CharacterGrid characters={characters} loading={loading} />
+        <CharacterGrid
+          characters={characters}
+          loading={loading}
+          setPage={setNextPage}
+        />
         <Col>
           <Container>
             <h4>Filter</h4>
