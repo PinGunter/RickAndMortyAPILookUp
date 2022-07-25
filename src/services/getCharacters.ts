@@ -7,10 +7,15 @@ type characterResponse = {
 export default function getCharacters({filter, page} : {filter?: Filter, page?: number}) : Promise<characterResponse>{
     let apiURL = `https://rickandmortyapi.com/api/character/?page=${page ? page : 1}`;
     if (filter){
+        if (filter.name){
+            apiURL = `${apiURL}&name=${filter.name}`;
+        }
         if (filter.status){
-            apiURL = `${apiURL}&status=${filter.status}`;        }
+            apiURL = `${apiURL}&status=${filter.status}`;        
+        }
         if (filter.gender){
-            apiURL = `${apiURL}&gender=${filter.gender}`;        }
+            apiURL = `${apiURL}&gender=${filter.gender}`;        
+        }
         if (filter.species){
             apiURL = `${apiURL}&species=${filter.species}`;
         }

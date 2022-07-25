@@ -24,6 +24,7 @@ export type Episode = {
 }
 
 export type Filter = {
+    name: string,
     status: string,
     gender: string,
     species: string

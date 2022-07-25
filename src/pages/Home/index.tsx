@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Spinner, Form, Button } from "react-bootstrap";
-import CharacterCard from "../../components/CharacterCard";
-import { useLocation } from "wouter";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Character, Filter } from "../../types";
 import "./styles.css";
 import getCharacters from "../../services/getCharacters";
@@ -11,11 +9,11 @@ const defaultFilter = {
   status: "",
   gender: "",
   species: "",
+  name: "",
 };
 
 export default function Home({ title }: { title: string }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [, setLocation] = useLocation();
   const [characters, setCharacters] = useState<Character[]>([]);
   const [filters, setFilters] = useState<Filter>(defaultFilter);
   const [loading, setLoading] = useState(true);
@@ -32,6 +30,7 @@ export default function Home({ title }: { title: string }) {
         const newCharacters = response.characters;
         setCharacters(newCharacters);
         setLoading(false);
+        setNextPage(1);
       } catch (error) {
         setLoading(false);
       }
@@ -55,11 +54,14 @@ export default function Home({ title }: { title: string }) {
         setNextPage(-1);
       }
     })();
-  }, [nextPage]);
+  }, [nextPage, filters]);
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
-    setLocation(`/search/${searchTerm}`);
+    setFilters({
+      ...filters!,
+      name: searchTerm,
+    });
   };
 
   const handleChange = (evt: any) => {
