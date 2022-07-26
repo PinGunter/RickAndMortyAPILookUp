@@ -1,14 +1,14 @@
 import React from "react";
 import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
 import { Waypoint } from "react-waypoint";
-import { Character, CharacterFilter } from "../../types";
+import { Character, CharacterFilterType } from "../../types";
 import CharacterCard from "../CharacterCard";
 
 type CharacterGridProps = {
   characters: Character[];
   loading: boolean;
   loadingNextPage: boolean;
-  filters?: CharacterFilter;
+  filters?: CharacterFilterType;
   setPage: Function;
 };
 

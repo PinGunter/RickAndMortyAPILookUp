@@ -1,9 +1,12 @@
 POR HACER:
+- Modularizar los resultados para no repetir codigo
+- Separar filtros en componentes
 - Pagina episodios
-- Pagina localizacion
+- Paginas individuales episodios y localizacion
 
 
 HECHO:
+- Pagina localizacion
 - Manejar errores
 - Filtro 
 - Modal de personajes

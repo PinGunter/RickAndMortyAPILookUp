@@ -2,13 +2,13 @@ import React from "react";
 import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
 import { Waypoint } from "react-waypoint";
 import LocationCard from "../LocationCard";
-import { Location, LocationFilter } from "../../types";
+import { Location, LocationFilterType } from "../../types";
 
 type LocationGridProps = {
   locations: Location[];
   loading: boolean;
   loadingNextPage: boolean;
-  filters?: LocationFilter;
+  filters?: LocationFilterType;
   setPage: Function;
 };
 

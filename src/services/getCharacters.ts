@@ -1,10 +1,10 @@
-import {Character, CharacterFilter} from '../types'
+import {Character, CharacterFilterType} from '../types'
 
 type characterResponse = {
     characters: Character[];
 }
 
-export default function getCharacters({filter, page} : {filter?: CharacterFilter, page?: number}) : Promise<characterResponse>{
+export default function getCharacters({filter, page} : {filter?: CharacterFilterType, page?: number}) : Promise<characterResponse>{
     let apiURL = `https://rickandmortyapi.com/api/character/?page=${page ? page : 1}`;
     if (filter){
         if (filter.name){

@@ -1,7 +1,7 @@
-import {LocationFilter, Location} from '../types'
+import {LocationFilterType, Location} from '../types'
 
 
-export default function getLocations({filter, page} : {filter: LocationFilter, page?: number}){
+export default function getLocations({filter, page} : {filter: LocationFilterType, page?: number}){
     let apiURL = `https://rickandmortyapi.com/api/location/?page=${page ? page : 1}`;
     if (filter){
         if (filter.name){

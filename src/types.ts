@@ -27,7 +27,8 @@ export type Episode = {
     codeName: string
 }
 
-export type CharacterFilter = {
+
+export type CharacterFilterType = {
     name: string,
     status: string,
     gender: string,
@@ -42,7 +43,7 @@ export const defaultCharacterFilter = {
     name: "",
   };
 
-export type LocationFilter = {
+export type LocationFilterType = {
     name: string,
     type: string,
 }

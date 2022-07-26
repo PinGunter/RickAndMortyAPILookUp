@@ -13,7 +13,9 @@ function App() {
       <Route path="/characters">
         {(params) => <CharacterGrid title="Characters" />}
       </Route>
-      <Route path="/locations/:id?">{(params) => <Locations />}</Route>{" "}
+      <Route path="/locations/:id?">
+        {(params) => <Locations id={params.id} />}
+      </Route>{" "}
       <Route path="/episodes/:id?">{(params) => <h1>Episodios</h1>}</Route>
     </>
   );

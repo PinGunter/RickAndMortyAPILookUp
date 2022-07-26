@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import {
   Character,
-  CharacterFilter,
+  CharacterFilterType,
   defaultCharacterFilter,
 } from "../../types";
 import "./styles.css";
@@ -12,7 +12,7 @@ import CharacterGrid from "../../components/CharacterGrid";
 export default function Home({ title }: { title: string }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [filters, setFilters] = useState<CharacterFilter>(
+  const [filters, setFilters] = useState<CharacterFilterType>(
     defaultCharacterFilter
   );
   const [loading, setLoading] = useState(true);
