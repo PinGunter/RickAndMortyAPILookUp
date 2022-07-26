@@ -4,6 +4,53 @@ import LocationGrid from "../../components/LocationGrid";
 import getLocations from "../../services/getLocations";
 import { Location, LocationFilter, defaultLocationFilter } from "../../types";
 
+const typeOptions = [
+  "Select",
+  "Acid Plant",
+  "Arcade",
+  "Artificially generated world",
+  "Asteroid",
+  "Base",
+  "Box",
+  "Consciousness",
+  "Convention",
+  "Country",
+  "Customs",
+  "Daycare",
+  "Death Star",
+  "Diegesis",
+  "Dimension",
+  "Dream",
+  "Dwarf Planet",
+  "Elemental Rings",
+  "Fantasy Town",
+  "Game",
+  "Hell",
+  "Human",
+  "Liquid",
+  "Machine",
+  "Memory",
+  "Menagerie",
+  "Microverse",
+  "Miniverse",
+  "Mount",
+  "Nightmare",
+  "Non-Diegetic Alternative Reality",
+  "Planet",
+  "Police Department",
+  "Quadrant",
+  "Quasar",
+  "Reality",
+  "Resort",
+  "Space",
+  "Space Station",
+  "Spacecraft",
+  "Teenyverse",
+  "TV",
+  "Woods",
+  "Unknown",
+];
+
 export default function Locations() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [filters, setFilters] = useState<LocationFilter>(defaultLocationFilter);
@@ -47,6 +94,27 @@ export default function Locations() {
     })();
   }, [nextPage]);
 
+  const handleSearch = (evt: any) => {
+    evt.preventDefault();
+    setFilters({
+      ...filters,
+      name: searchTerm,
+    });
+  };
+
+  const handleChangeSearch = (evt: any) => {
+    setSearchTerm(evt.target.value);
+  };
+
+  const handleChangeTypeFilter = (evt: any) => {
+    setFilters({
+      ...filters,
+      type: evt.target.value === "Select" ? "" : evt.target.value,
+    });
+  };
+
+  const handleResetFilter = () => setFilters(defaultLocationFilter);
+
   return (
     <>
       <Container fluid>
@@ -64,14 +132,14 @@ export default function Locations() {
         <Col>
           <Container>
             <h4>Filter</h4>{" "}
-            <form onSubmit={() => {}}>
+            <form onSubmit={handleSearch}>
               <Form.Label>Name</Form.Label>
               <div className="form-group section-search-bar">
                 <input
                   className="form-control"
-                  onChange={() => {}}
+                  onChange={handleChangeSearch}
                   type="text"
-                  value=""
+                  value={searchTerm}
                   placeholder="Search"
                 ></input>
                 <button type="submit" className="btn btn-outline-success">
@@ -79,53 +147,15 @@ export default function Locations() {
                 </button>
               </div>
             </form>
-            <form onSubmit={() => {}}>
+            <form onSubmit={handleResetFilter}>
               <Form.Label>Type</Form.Label>
-              <Form.Select>
-                <option>Select</option>
-                <option>Acid Plant</option>
-                <option>Arcade</option>
-                <option>Artificially generated world</option>
-                <option>Asteroid</option>
-                <option>Base</option>
-                <option>Box</option>
-                <option>Consciousness</option>
-                <option>Convention</option>
-                <option>Country</option>
-                <option>Customs</option>
-                <option>Daycare</option>
-                <option>Death Star</option>
-                <option>Diegesis</option>
-                <option>Dimension</option>
-                <option>Dream</option>
-                <option>Dwarf Planet</option>
-                <option>Elemental Rings</option>
-                <option>Fantasy Town</option>
-                <option>Game</option>
-                <option>Hell</option>
-                <option>Human</option>
-                <option>Liquid</option>
-                <option>Machine</option>
-                <option>Memory</option>
-                <option>Menagerie</option>
-                <option>Microverse</option>
-                <option>Miniverse</option>
-                <option>Mount</option>
-                <option>Nightmare</option>
-                <option>Non-Diegetic Alternative Reality</option>
-                <option>Planet</option>
-                <option>Police Department</option>
-                <option>Quadrant</option>
-                <option>Quasar</option>
-                <option>Reality</option>
-                <option>Resort</option>
-                <option>Space</option>
-                <option>Space Station</option>
-                <option>Spacecraft</option>
-                <option>Teenyverse</option>
-                <option>TV</option>
-                <option>Woods</option>
-                <option>Unknown</option>
+              <Form.Select
+                value={filters.type}
+                onChange={handleChangeTypeFilter}
+              >
+                {typeOptions.map((singleOption) => {
+                  return <option>{singleOption}</option>;
+                })}
               </Form.Select>
               <Button
                 className="btn-filter"
