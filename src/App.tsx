@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import CharacterGrid from "./pages/Home";
 import { Route } from "wouter";
+import Locations from "./pages/Locations";
 
 function App() {
   return (
@@ -12,9 +13,7 @@ function App() {
       <Route path="/characters">
         {(params) => <CharacterGrid title="Characters" />}
       </Route>
-      <Route path="/locations/:id?">
-        {(params) => <h1>Localizaciones</h1>}
-      </Route>{" "}
+      <Route path="/locations/:id?">{(params) => <Locations />}</Route>{" "}
       <Route path="/episodes/:id?">{(params) => <h1>Episodios</h1>}</Route>
     </>
   );

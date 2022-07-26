@@ -46,7 +46,7 @@ export default function CharacterCard({ info }: { info: Character }) {
   };
 
   const LinkToLocation = (location: Location) => {
-    const locationId = location.url.split("/").pop();
+    const locationId = location.url!.split("/").pop();
     return `/locations/${locationId}`;
   };
 

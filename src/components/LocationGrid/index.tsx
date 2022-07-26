@@ -1,24 +1,24 @@
 import React from "react";
 import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
 import { Waypoint } from "react-waypoint";
-import { Character, CharacterFilter } from "../../types";
-import CharacterCard from "../CharacterCard";
+import LocationCard from "../LocationCard";
+import { Location, LocationFilter } from "../../types";
 
-type CharacterGridProps = {
-  characters: Character[];
+type LocationGridProps = {
+  locations: Location[];
   loading: boolean;
   loadingNextPage: boolean;
-  filters?: CharacterFilter;
+  filters?: LocationFilter;
   setPage: Function;
 };
 
-export default function CharacterGrid({
-  characters,
+export default function LocationGrid({
+  locations,
   loading,
   loadingNextPage,
   filters,
   setPage,
-}: CharacterGridProps) {
+}: LocationGridProps) {
   const handleNextPage = () => {
     setPage((currentPage: number) => {
       if (currentPage !== -1) return currentPage + 1;
@@ -37,10 +37,10 @@ export default function CharacterGrid({
           <Col xs={9}>
             <Container fluid>
               <Row>
-                {characters.map((character) => {
+                {locations.map((location) => {
                   return (
-                    <Col key={character.id}>
-                      <CharacterCard info={character} />
+                    <Col xs={6} key={location.id}>
+                      <LocationCard info={location} />
                     </Col>
                   );
                 })}

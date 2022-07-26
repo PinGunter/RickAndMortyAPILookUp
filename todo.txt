@@ -1,7 +1,6 @@
 POR HACER:
 - Pagina episodios
 - Pagina localizacion
-- Que la pagina de inicio y búsqueda sean la misma, solo se actualice el componente del grid. Así se aplican los filtros sobre la búsqueda tmb
 
 
 HECHO:
@@ -9,5 +8,6 @@ HECHO:
 - Filtro 
 - Modal de personajes
 - Paginacion
+- Que la pagina de inicio y búsqueda sean la misma, solo se actualice el componente del grid. Así se aplican los filtros sobre la búsqueda tmb
 
 

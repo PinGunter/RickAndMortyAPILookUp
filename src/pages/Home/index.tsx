@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Character, Filter } from "../../types";
+import {
+  Character,
+  CharacterFilter,
+  defaultCharacterFilter,
+} from "../../types";
 import "./styles.css";
 import getCharacters from "../../services/getCharacters";
 import CharacterGrid from "../../components/CharacterGrid";
 
-const defaultFilter = {
-  status: "",
-  gender: "",
-  species: "",
-  name: "",
-};
-
 export default function Home({ title }: { title: string }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [filters, setFilters] = useState<Filter>(defaultFilter);
+  const [filters, setFilters] = useState<CharacterFilter>(
+    defaultCharacterFilter
+  );
   const [loading, setLoading] = useState(true);
   const [nextPage, setNextPage] = useState(1);
   const [loadingNextPage, setLoadingNextPage] = useState(false);
@@ -33,12 +32,13 @@ export default function Home({ title }: { title: string }) {
         setNextPage(1);
       } catch (error) {
         setLoading(false);
+        setNextPage(-1);
       }
     })();
   }, [filters]);
 
   useEffect(() => {
-    if (nextPage === 1) return;
+    if (nextPage === 1 || nextPage === -1) return;
     (async () => {
       setLoadingNextPage(true);
       try {
@@ -54,7 +54,7 @@ export default function Home({ title }: { title: string }) {
         setNextPage(-1);
       }
     })();
-  }, [nextPage, filters]);
+  }, [nextPage]);
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
@@ -91,7 +91,7 @@ export default function Home({ title }: { title: string }) {
 
   const handleFilter = (evt: any) => {
     evt.preventDefault();
-    setFilters(defaultFilter);
+    setFilters(defaultCharacterFilter);
   };
 
   return (
@@ -99,20 +99,6 @@ export default function Home({ title }: { title: string }) {
       <Container fluid>
         <div className="section-header">
           <h2 className="section-title">{title}</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group section-search-bar">
-              <input
-                className="form-control section-search"
-                onChange={handleChange}
-                type="text"
-                value={searchTerm}
-                placeholder="Search"
-              ></input>
-              <button type="submit" className="btn btn-outline-success">
-                Search
-              </button>
-            </div>
-          </form>
         </div>
       </Container>
       <Row>
@@ -124,7 +110,22 @@ export default function Home({ title }: { title: string }) {
         />
         <Col>
           <Container>
-            <h4>Filter</h4>
+            <h4>Filter</h4>{" "}
+            <form onSubmit={handleSubmit}>
+              <Form.Label>Name</Form.Label>
+              <div className="form-group section-search-bar">
+                <input
+                  className="form-control"
+                  onChange={handleChange}
+                  type="text"
+                  value={searchTerm}
+                  placeholder="Search"
+                ></input>
+                <button type="submit" className="btn btn-outline-success">
+                  Search
+                </button>
+              </div>
+            </form>
             <form onSubmit={handleFilter}>
               <Form.Label>Status</Form.Label>
               <Form.Select value={filters.status} onChange={changeStatusFilter}>
