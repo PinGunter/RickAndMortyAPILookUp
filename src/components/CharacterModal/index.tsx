@@ -3,6 +3,8 @@ import { Button, Row, Modal, Spinner, Table, ListGroup } from "react-bootstrap";
 import getEpisodeByURL from "../../services/getEpisodeByURL";
 import getSingleCharacter from "../../services/getSingleCharacter";
 import { Character, Episode } from "../../types";
+import StatusBadge from "../StatusBadge";
+import GenderInfo from "../GenderInfo";
 import "./styles.css";
 
 export default function CharacterModal({
@@ -55,14 +57,18 @@ export default function CharacterModal({
                 <ListGroup className="info">
                   <ListGroup.Item>id: {character.id}</ListGroup.Item>
                   <ListGroup.Item>Name: {character.name}</ListGroup.Item>
-                  <ListGroup.Item>Status: {character.status}</ListGroup.Item>
+                  <ListGroup.Item>
+                    Status: <StatusBadge status={character.status} />
+                  </ListGroup.Item>
                   <ListGroup.Item>Species: {character.species}</ListGroup.Item>
                   {character.type ? (
                     <ListGroup.Item>Type: {character.type}</ListGroup.Item>
                   ) : (
                     ""
                   )}
-                  <ListGroup.Item>Gender: {character.gender}</ListGroup.Item>
+                  <ListGroup.Item>
+                    Gender: {<GenderInfo gender={character.gender} />}
+                  </ListGroup.Item>
                   <ListGroup.Item>
                     Origin: {character.origin.name}
                   </ListGroup.Item>

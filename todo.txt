@@ -1,6 +1,14 @@
+OPCIONAL
+- Switch con objetos
+
 POR HACER:
-- Modularizar los resultados para no repetir codigo
-- Separar filtros en componentes
+- constants para urls y endpoints
+- utils para paginas y filtros
+- refactor de todos los servicios
+- Fix Grid => Use component instead of Fn
+- useLocation => routes as constants
+- object destructuring on components
+
 - Pagina episodios
 - Paginas individuales episodios y localizacion
 
@@ -12,5 +20,10 @@ HECHO:
 - Modal de personajes
 - Paginacion
 - Que la pagina de inicio y búsqueda sean la misma, solo se actualice el componente del grid. Así se aplican los filtros sobre la búsqueda tmb
+- Separar las funciones de genero/status para usarse en el Modal
+- Switch con strings en lugar de con icon
+- Componente de gender/status?
+- Modularizar los resultados para no repetir codigo
+- Separar filtros en componentes
 
 

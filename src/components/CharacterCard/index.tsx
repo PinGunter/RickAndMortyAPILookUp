@@ -1,45 +1,13 @@
 import React, { useState } from "react";
-import { Badge, Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card, ListGroup } from "react-bootstrap";
 import { Link } from "wouter";
 import { Character, Location } from "../../types";
 import CharacterModal from "../CharacterModal";
+import GenderInfo from "../GenderInfo";
+import StatusBadge from "../StatusBadge";
 
 export default function CharacterCard({ info }: { info: Character }) {
   const [modalShow, setModalShow] = useState(false);
-
-  const statusColor = (status: string) => {
-    switch (status) {
-      case "Alive":
-        return "success";
-      case "Dead":
-        return "danger";
-      case "unknown":
-        return "secondary";
-    }
-  };
-
-  const genderIcon = (gender: string) => {
-    let icon: JSX.Element;
-    switch (gender) {
-      case "Male":
-        icon = <i className="bi bi-gender-male"></i>;
-        break;
-      case "Female":
-        icon = <i className="bi bi-gender-female"></i>;
-        break;
-      case "Genderless":
-        icon = <i className="bi bi-slash-circle"></i>;
-        break;
-      default:
-        icon = <i className="bi bi-question-circle"></i>;
-        break;
-    }
-    return (
-      <span>
-        {icon} {gender}
-      </span>
-    );
-  };
 
   const handleClick = () => {
     setModalShow(true);
@@ -59,10 +27,11 @@ export default function CharacterCard({ info }: { info: Character }) {
           <Card.Text>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                Status:{" "}
-                <Badge bg={statusColor(info.status)}>{info.status}</Badge>
+                Status: <StatusBadge status={info.status} />
               </ListGroup.Item>
-              <ListGroup.Item>Gender: {genderIcon(info.gender)}</ListGroup.Item>
+              <ListGroup.Item>
+                Gender: {<GenderInfo gender={info.gender} />}
+              </ListGroup.Item>
               <ListGroup.Item>Species: {info.species}</ListGroup.Item>
               <ListGroup.Item>
                 Origin:{" "}
