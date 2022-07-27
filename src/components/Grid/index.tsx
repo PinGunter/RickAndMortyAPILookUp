@@ -10,7 +10,7 @@ import {
 import CharacterCard from "../CharacterCard";
 import LocationCard from "../LocationCard";
 
-type GridProps = {
+export type GridProps = {
   data: Location[] | Character[];
   loading: boolean;
   loadingNextPage: boolean;
