@@ -1,24 +1,34 @@
 import React from "react";
 import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
 import { Waypoint } from "react-waypoint";
-import { Character, CharacterFilterType } from "../../types";
+import {
+  Location,
+  Character,
+  LocationFilterType,
+  CharacterFilterType,
+} from "../../types";
 import CharacterCard from "../CharacterCard";
+import LocationCard from "../LocationCard";
 
-type CharacterGridProps = {
-  characters: Character[];
+type GridProps = {
+  data: Location[] | Character[];
   loading: boolean;
   loadingNextPage: boolean;
-  filters?: CharacterFilterType;
+  filters?: LocationFilterType | CharacterFilterType;
   setPage: Function;
+  colSize: number | null;
+  card: Function;
 };
 
-export default function CharacterGrid({
-  characters,
+export default function Grid({
+  data,
   loading,
   loadingNextPage,
   filters,
   setPage,
-}: CharacterGridProps) {
+  colSize,
+  card,
+}: GridProps) {
   const handleNextPage = () => {
     setPage((currentPage: number) => {
       if (currentPage !== -1) return currentPage + 1;
@@ -37,10 +47,14 @@ export default function CharacterGrid({
           <Col xs={9}>
             <Container fluid>
               <Row>
-                {characters.map((character) => {
+                {data.map((singleData) => {
                   return (
-                    <Col key={character.id}>
-                      <CharacterCard info={character} />
+                    <Col xs={colSize ? colSize : undefined} key={singleData.id}>
+                      {"status" in singleData ? (
+                        <CharacterCard info={singleData} />
+                      ) : (
+                        <LocationCard info={singleData} />
+                      )}
                     </Col>
                   );
                 })}

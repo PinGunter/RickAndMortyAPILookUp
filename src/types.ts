@@ -29,10 +29,10 @@ export type Episode = {
 
 
 export type CharacterFilterType = {
-    name: string,
-    status: string,
-    gender: string,
-    species: string
+    name?: string,
+    status?: string,
+    gender?: string,
+    species?: string
 }
 
 
@@ -44,8 +44,8 @@ export const defaultCharacterFilter = {
   };
 
 export type LocationFilterType = {
-    name: string,
-    type: string,
+    name?: string,
+    type?: string,
 }
 
 export const defaultLocationFilter = {

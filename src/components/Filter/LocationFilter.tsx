@@ -57,7 +57,7 @@ export default function LocationFilter({ setParent }: { setParent: Function }) {
 
   useEffect(() => {
     setParent(filters);
-  }, [filters]);
+  }, [filters, setParent]);
 
   const handleSearch = (evt: any) => {
     evt.preventDefault();
@@ -77,8 +77,10 @@ export default function LocationFilter({ setParent }: { setParent: Function }) {
       type: evt.target.value === "Select" ? "" : evt.target.value,
     });
   };
-  const handleResetFilter = () => setFilters(defaultLocationFilter);
-
+  const handleResetFilter = () => {
+    setSearchTerm("");
+    setFilters(defaultLocationFilter);
+  };
   return (
     <>
       <Container>

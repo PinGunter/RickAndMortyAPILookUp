@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Row, Modal, Spinner, Table, ListGroup } from "react-bootstrap";
 import getEpisodeByURL from "../../services/getEpisodeByURL";
 import getSingleCharacter from "../../services/getSingleCharacter";
@@ -12,7 +12,7 @@ export default function CharacterModal({
 }: {
   show: boolean;
   id: string;
-  onHide: any;
+  onHide: () => void;
 }) {
   const [character, setCharacter] = useState<Character>({} as Character);
   const [loading, setLoading] = useState(true);
@@ -82,7 +82,7 @@ export default function CharacterModal({
                   <th>Codename</th>
                 </thead>
                 <tbody>
-                  {episodes!.map((ep: any) => (
+                  {episodes!.map((ep: Episode) => (
                     <tr>
                       <td>{ep.id}</td>
                       <td>{ep.name}</td>

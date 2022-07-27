@@ -1,10 +1,8 @@
 import {Character, CharacterFilterType} from '../types'
 
-type characterResponse = {
-    characters: Character[];
-}
 
-export default function getCharacters({filter, page} : {filter?: CharacterFilterType, page?: number}) : Promise<characterResponse>{
+
+export default function getCharacters({filter, page} : {filter?: CharacterFilterType, page?: number}){
     let apiURL = `https://rickandmortyapi.com/api/character/?page=${page ? page : 1}`;
     if (filter){
         if (filter.name){
@@ -22,7 +20,7 @@ export default function getCharacters({filter, page} : {filter?: CharacterFilter
     }
     
 
-    const fetchCharacters = async () : Promise<characterResponse> => {
+    const fetchCharacters = async () : Promise<Character[]> => {
         const response = await fetch(apiURL);
         if (!response.ok) throw new Error("Error while fetching data")
         const responseJson = await response.json(); 
@@ -38,16 +36,16 @@ export default function getCharacters({filter, page} : {filter?: CharacterFilter
          * location
          */
 
-         const _characters = results.map((ch: any) :Character => {
+         const _characters = results.map((ch: Character) => {
             const {id, name, status, gender, image, species, type, origin, location, episode} = ch;
             return {id, name, status, gender, image, species,type,origin, location, episode};
          });
-         return {characters: _characters};
+         return _characters
+        }
 
+        
+        return  fetchCharacters();
+        
     }
-
-    return  fetchCharacters();
-
     
 
-}

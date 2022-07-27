@@ -28,3 +28,8 @@
 .centered-msg {
   margin-top: 30vh;
 }
+
+.btn-filter {
+  margin-top: 5px;
+  float: right;
+}
