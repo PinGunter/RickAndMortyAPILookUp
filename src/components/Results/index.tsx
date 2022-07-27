@@ -5,12 +5,12 @@ import {
   CharacterFilterType,
   LocationFilterType,
 } from "../../types";
+import Grid, { GridProps } from "../Grid";
 
 type resultProps = {
   title: string;
   filterComponent: Function;
   getData: Function;
-  grid: Function;
   colSize?: number | null;
 };
 
@@ -20,7 +20,6 @@ export default function Results({
   title,
   filterComponent,
   getData,
-  grid,
   colSize,
 }: resultProps) {
   const [data, setData] = useState<dataType[]>([]);
@@ -75,13 +74,7 @@ export default function Results({
         </div>
       </Container>
       <Row>
-        {grid({
-          data: data,
-          loading: loading,
-          setPage: setNextPage,
-          loadingNextPage: loadingNextPage,
-          colSize: colSize,
-        })}
+        <Grid data={data} />
         <Col>{filterComponent({ setParent: setFilters })}</Col>
       </Row>
     </>

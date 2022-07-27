@@ -14,7 +14,7 @@ export default function Header() {
             <Nav>
               <Nav.Link
                 className="link"
-                onClick={() => setLocation("/characters")}
+                onClick={() => setLocation("/character")}
               >
                 Characters
               </Nav.Link>

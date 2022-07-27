@@ -1,6 +1,6 @@
 export type Location = {
     id?: string,
-    name: string, 
+    name: string,
     url? : string,
     type?: string,
     dimension?: string,
@@ -10,18 +10,18 @@ export type Location = {
 export type Character = {
     id: string,
     name: string,
-    status: string, 
-    gender: string, 
+    status: string,
+    gender: string,
     image: string,
     species: string,
     type: string,
     origin: Location,
     location : Location,
-    episode: string[]  
+    episode: string[]
 }
 
 export type Episode = {
-    id: string, 
+    id: string,
     name: string,
     airDate: string,
     codeName: string
@@ -36,19 +36,20 @@ export type CharacterFilterType = {
 }
 
 
-export const defaultCharacterFilter = {
+// TODO: DELETE DEFAULT + FIX USAGES
+export const defaultCharacterFilter: CharacterFilterType = {
     status: "",
     gender: "",
     species: "",
     name: "",
-  };
+};
 
 export type LocationFilterType = {
     name?: string,
     type?: string,
 }
 
-export const defaultLocationFilter = {
+export const defaultLocationFilter: LocationFilterType = {
     name: "",
     type: ""
 }

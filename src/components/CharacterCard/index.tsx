@@ -18,11 +18,12 @@ export default function CharacterCard({ info }: { info: Character }) {
     }
   };
 
+  // TODO AVOID SWITCH CASE
   const genderIcon = (gender: string) => {
     let icon: JSX.Element;
     switch (gender) {
       case "Male":
-        icon = <i className="bi bi-gender-male"></i>;
+        icon = <i className="bi bi-gender-male" />;
         break;
       case "Female":
         icon = <i className="bi bi-gender-female"></i>;
