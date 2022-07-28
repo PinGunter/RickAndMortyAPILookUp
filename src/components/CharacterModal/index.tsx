@@ -88,7 +88,7 @@ export default function CharacterModal({
                   <th>Codename</th>
                 </thead>
                 <tbody>
-                  {episodes!.map((ep: Episode) => (
+                  {episodes.map((ep: Episode) => (
                     <tr>
                       <td>{ep.id}</td>
                       <td>{ep.name}</td>

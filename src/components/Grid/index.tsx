@@ -16,8 +16,7 @@ type GridProps = {
   loadingNextPage: boolean;
   filters?: LocationFilterType | CharacterFilterType;
   setPage: Function;
-  colSize: number | null;
-  card: Function;
+  colSize?: number | null;
 };
 
 export default function Grid({
@@ -27,7 +26,6 @@ export default function Grid({
   filters,
   setPage,
   colSize,
-  card,
 }: GridProps) {
   const handleNextPage = () => {
     setPage((currentPage: number) => {

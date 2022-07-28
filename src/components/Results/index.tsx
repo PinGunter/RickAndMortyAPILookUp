@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import {
-  Character,
-  CharacterFilterType,
-  LocationFilterType,
-} from "../../types";
+import Grid from "../Grid";
+import { CharacterFilterType, dataType, LocationFilterType } from "../../types";
 
 type resultProps = {
   title: string;
   filterComponent: Function;
   getData: Function;
-  grid: Function;
   colSize?: number | null;
 };
-
-type dataType = Character | Location;
 
 export default function Results({
   title,
   filterComponent,
   getData,
-  grid,
   colSize,
 }: resultProps) {
   const [data, setData] = useState<dataType[]>([]);
@@ -75,13 +68,13 @@ export default function Results({
         </div>
       </Container>
       <Row>
-        {grid({
-          data: data,
-          loading: loading,
-          setPage: setNextPage,
-          loadingNextPage: loadingNextPage,
-          colSize: colSize,
-        })}
+        <Grid
+          data={data}
+          loading={loading}
+          setPage={setNextPage}
+          loadingNextPage={loadingNextPage}
+          colSize={colSize}
+        />
         <Col>{filterComponent({ setParent: setFilters })}</Col>
       </Row>
     </>

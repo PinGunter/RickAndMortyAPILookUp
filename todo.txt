@@ -1,13 +1,12 @@
+COMENTAR
+- Filter como componente
+
 OPCIONAL
 - Switch con objetos
 
 POR HACER:
-- constants para urls y endpoints
-- utils para paginas y filtros
-- refactor de todos los servicios
-- Fix Grid => Use component instead of Fn
-- useLocation => routes as constants
 - object destructuring on components
+- utils para paginas y filtros
 
 - Pagina episodios
 - Paginas individuales episodios y localizacion
@@ -25,5 +24,9 @@ HECHO:
 - Componente de gender/status?
 - Modularizar los resultados para no repetir codigo
 - Separar filtros en componentes
+- Fix Grid => Use component instead of Fn
+- useLocation => routes as constants
+- constants para urls y endpoints
+- refactor de todos los servicios
 
 

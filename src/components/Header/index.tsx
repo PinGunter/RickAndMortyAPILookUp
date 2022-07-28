@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useLocation } from "wouter";
+import { routes } from "../../routes";
 
 export default function Header() {
   const [, setLocation] = useLocation();
@@ -14,14 +15,14 @@ export default function Header() {
             <Nav>
               <Nav.Link
                 className="link"
-                onClick={() => setLocation("/characters")}
+                onClick={() => setLocation(routes["characters"])}
               >
                 Characters
               </Nav.Link>
-              <Nav.Link onClick={() => setLocation("/locations")}>
+              <Nav.Link onClick={() => setLocation(routes["locations"])}>
                 Locations
               </Nav.Link>
-              <Nav.Link onClick={() => setLocation("/episodes")}>
+              <Nav.Link onClick={() => setLocation(routes["episodes"])}>
                 Episodes
               </Nav.Link>
             </Nav>

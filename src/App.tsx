@@ -1,22 +1,23 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header";
-import CharacterGrid from "./pages/Home";
+import Home from "./pages/Home";
 import { Route } from "wouter";
 import Locations from "./pages/Locations";
+import { routes } from "./routes";
 
 function App() {
   return (
     <>
       <Header />
-      <Route path="/">{(params) => <CharacterGrid title="Characters" />}</Route>
-      <Route path="/characters">
-        {(params) => <CharacterGrid title="Characters" />}
-      </Route>
-      <Route path="/locations/:id?">
+      <Route path="/" component={Home} />
+      <Route path={routes["characters"]} component={Home} />
+      <Route path={`${routes["locations"]}/:id?`}>
         {(params) => <Locations id={params.id} />}
       </Route>{" "}
-      <Route path="/episodes/:id?">{(params) => <h1>Episodios</h1>}</Route>
+      <Route path={`${routes["episodes"]}/:id?`}>
+        {(params) => <h1>Episodios</h1>}
+      </Route>
     </>
   );
 }

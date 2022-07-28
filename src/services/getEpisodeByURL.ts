@@ -1,16 +1,13 @@
-export default function getEpisodeByURL(episode: string){
-    const getEpisode = async (url : string) => {
-        const response = await fetch(url);
-        const responseJson = await response.json();
-        const newEpisode = {
-            id: responseJson.id,
-            name: responseJson.name,
-            airDate: responseJson.air_date,
-            codeName: responseJson.episode
-        } 
-        return newEpisode;
-
-    }
-    return getEpisode(episode);
-
+import { Episode } from "../types";
+import { fetchFromApi } from "./servicesUtils";
+export default async function getEpisodeByURL(
+  episode: string
+): Promise<Episode> {
+  const episodeResponse = await fetchFromApi(episode);
+  const newEpisode: Episode = {
+    ...episodeResponse,
+    airDate: episodeResponse.air_date,
+    codeName: episodeResponse.episode,
+  };
+  return newEpisode;
 }

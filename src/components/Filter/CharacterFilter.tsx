@@ -24,7 +24,7 @@ export default function CharacterFilter({
     });
   };
 
-  const handleChange = (evt: any) => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(evt.target.value);
   };
 
