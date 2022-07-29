@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { CharacterFilterType, defaultCharacterFilter } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setName,
+  setGender,
+  setStatus,
+  setSpecies,
+  resetLocation,
+  selectFilters,
+  resetFilter,
+} from "../../features/filters/filtersSlice";
 
-export default function CharacterFilter({
-  setParent,
-}: {
-  setParent: Function;
-}) {
+export default function CharacterFilter() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState<CharacterFilterType>(
-    defaultCharacterFilter
+  const filters = useSelector(selectFilters);
+  const dispatch = useDispatch();
+  useEffect(
+    // @ts-ignore
+    () => {
+      dispatch(resetLocation());
+    },
+    [dispatch]
   );
-
-  useEffect(() => {
-    setParent(filters);
-  }, [filters, setParent]);
 
   const handleSubmit = (evt: any) => {
     evt.preventDefault();
-    setFilters({
-      ...filters!,
-      name: searchTerm,
-    });
+    dispatch(setName(searchTerm));
   };
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,29 +33,20 @@ export default function CharacterFilter({
   };
 
   const changeStatusFilter = (evt: any) => {
-    setFilters({
-      ...filters!,
-      status: evt.target.value === "Select" ? "" : evt.target.value,
-    });
+    dispatch(setStatus(evt.target.value === "Select" ? "" : evt.target.value));
   };
 
   const changeGenderFilter = (evt: any) => {
-    setFilters({
-      ...filters!,
-      gender: evt.target.value === "Select" ? "" : evt.target.value,
-    });
+    dispatch(setGender(evt.target.value === "Select" ? "" : evt.target.value));
   };
 
   const changeSpeciesFilter = (evt: any) => {
-    setFilters({
-      ...filters!,
-      species: evt.target.value === "Select" ? "" : evt.target.value,
-    });
+    dispatch(setSpecies(evt.target.value === "Select" ? "" : evt.target.value));
   };
 
   const handleFilter = (evt: any) => {
-    setFilters(defaultCharacterFilter);
     setSearchTerm("");
+    dispatch(resetFilter);
   };
 
   return (

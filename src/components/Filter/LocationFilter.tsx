@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { LocationFilterType, defaultLocationFilter } from "../../types";
-
+import {
+  setName,
+  setType,
+  selectFilters,
+  resetFilter,
+  resetCharacter,
+} from "../../features/filters/filtersSlice";
+import { useDispatch, useSelector } from "react-redux";
 const typeOptions = [
   "Select",
   "Acid Plant",
@@ -49,22 +55,22 @@ const typeOptions = [
   "Unknown",
 ];
 
-export default function LocationFilter({ setParent }: { setParent: Function }) {
-  const [filters, setFilters] = useState<LocationFilterType>(
-    defaultLocationFilter
-  );
+export default function LocationFilter() {
   const [searchTerm, setSearchTerm] = useState("");
+  const filters = useSelector(selectFilters);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setParent(filters);
-  }, [filters, setParent]);
+  useEffect(
+    // @ts-ignore
+    () => {
+      dispatch(resetCharacter());
+    },
+    [dispatch]
+  );
 
   const handleSearch = (evt: any) => {
     evt.preventDefault();
-    setFilters({
-      ...filters,
-      name: searchTerm,
-    });
+    dispatch(setName(evt.target.value));
   };
 
   const handleChangeSearch = (evt: any) => {
@@ -72,14 +78,11 @@ export default function LocationFilter({ setParent }: { setParent: Function }) {
   };
 
   const handleChangeTypeFilter = (evt: any) => {
-    setFilters({
-      ...filters,
-      type: evt.target.value === "Select" ? "" : evt.target.value,
-    });
+    dispatch(setType(evt.target.value === "Select" ? "" : evt.target.value));
   };
   const handleResetFilter = () => {
     setSearchTerm("");
-    setFilters(defaultLocationFilter);
+    dispatch(resetFilter);
   };
   return (
     <>

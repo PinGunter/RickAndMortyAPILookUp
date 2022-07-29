@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Grid from "../Grid";
-import { CharacterFilterType, dataType, LocationFilterType } from "../../types";
+import { Filter, dataType } from "../../types";
+import { useSelector } from "react-redux";
+import { selectFilters } from "../../features/filters/filtersSlice";
 
 type resultProps = {
   title: string;
@@ -16,10 +18,9 @@ export default function Results({
   getData,
   colSize,
 }: resultProps) {
+  const FilterComponent = filterComponent;
   const [data, setData] = useState<dataType[]>([]);
-  const [filters, setFilters] = useState<
-    LocationFilterType | CharacterFilterType
-  >({});
+  const filters = useSelector(selectFilters);
   const [loading, setLoading] = useState(true);
   const [nextPage, setNextPage] = useState(1);
   const [loadingNextPage, setLoadingNextPage] = useState(false);
@@ -75,7 +76,9 @@ export default function Results({
           loadingNextPage={loadingNextPage}
           colSize={colSize}
         />
-        <Col>{filterComponent({ setParent: setFilters })}</Col>
+        <Col>
+          <FilterComponent />
+        </Col>
       </Row>
     </>
   );

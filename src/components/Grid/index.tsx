@@ -1,12 +1,7 @@
 import React from "react";
 import { Col, Spinner, Container, Row, Alert } from "react-bootstrap";
 import { Waypoint } from "react-waypoint";
-import {
-  Location,
-  Character,
-  LocationFilterType,
-  CharacterFilterType,
-} from "../../types";
+import { Location, Character, Filter } from "../../types";
 import CharacterCard from "../CharacterCard";
 import LocationCard from "../LocationCard";
 
@@ -14,7 +9,7 @@ type GridProps = {
   data: Location[] | Character[];
   loading: boolean;
   loadingNextPage: boolean;
-  filters?: LocationFilterType | CharacterFilterType;
+  filters?: Filter;
   setPage: Function;
   colSize?: number | null;
 };
